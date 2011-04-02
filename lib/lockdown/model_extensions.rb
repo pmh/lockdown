@@ -4,11 +4,15 @@ module Lockdown
       klass.extend ClassMethods
     end
     
+    def in_role?(*roles)
+      roles.any? { |role_type| self.send("#{role_type}?") }
+    end
+    
     module ClassMethods
       def roles(*roles)
-        roles.each do |role_type|
-          define_method "#{role_type}?" do
-            role.to_s == role_type.to_s
+        roles.each do |role|
+          define_method "#{role}?" do
+            role_type.to_s == role.to_s
           end
         end
       end

@@ -5,7 +5,7 @@ class ModelExtensionsTest < ActiveSupport::TestCase
     @ModelClass = Class.new do
       include Lockdown::ModelExtensions
 
-      attr_accessor :role
+      attr_accessor :role_type
     end
   end
   
@@ -37,17 +37,31 @@ class ModelExtensionsTest < ActiveSupport::TestCase
     @ModelClass.roles :admin, :user, :guest
     @model = @ModelClass.new
 
-    @model.role = :admin
+    @model.role_type = :admin
 
-    assert_equal @model.admin?, true
-    assert_equal @model.user?,  false
-    assert_equal @model.guest?, false
+    assert_equal true,  @model.admin?
+    assert_equal false, @model.user?
+    assert_equal false, @model.guest?
 
-    @model.role = :user
+    @model.role_type = :user
 
-    assert_equal @model.admin?, false
-    assert_equal @model.user?,  true
-    assert_equal @model.guest?, false
+    assert_equal false, @model.admin?
+    assert_equal true,  @model.user?
+    assert_equal false, @model.guest?
+  end
+  
+  test "in_role?" do
+    @ModelClass.roles :admin, :user, :guest
+    @model = @ModelClass.new
+    
+    @model.role_type = :admin
+    assert_equal true, @model.in_role?(:admin, :user)
+
+    @model.role_type = :user
+    assert_equal true, @model.in_role?(:admin, :user)
+
+    @model.role_type = :foobaz
+    assert_equal false, @model.in_role?(:admin, :user)
   end
   
   def teardown
