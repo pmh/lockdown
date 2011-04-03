@@ -1,7 +1,15 @@
 require 'test_helper'
 
 class LockdownTest < ActiveSupport::TestCase
-  test "truth" do
-    assert_kind_of Module, Lockdown
+  test "it defines model extensions" do
+    assert_kind_of Module, Lockdown::ModelExtensions
+  end
+
+  test "it defines controller extensions" do
+    assert_kind_of Module, Lockdown::ControllerExtensions
+  end
+
+  test "it defines view extensions" do
+    assert_kind_of Module, Lockdown::ViewExtensions
   end
 end
