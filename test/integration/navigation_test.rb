@@ -67,4 +67,13 @@ class NavigationTest < ActiveSupport::IntegrationCase
     visit "/users_and_admins"
     assert_equal "Welcome users and admins!", page.body
   end
+
+  test "/erb_template renders only the content visible to admins" do
+    visit "/erb_template"
+
+    assert_match    /<p>Visible to all<\/p>/,              page.body
+    assert_match    /<p>Visible to admins<\/p>/,           page.body
+    assert_match    /<p>Visible to admins and users<\/p>/, page.body
+    assert_no_match /<p>Visible to users<\/p>/,            page.body
+  end
 end

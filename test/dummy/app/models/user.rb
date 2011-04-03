@@ -1,6 +1,4 @@
-class User
-  include Lockdown::ModelExtensions
-
+class User < ActiveRecord::Base
   roles :admin, :user, :guest
   
   attr_accessor :role_type

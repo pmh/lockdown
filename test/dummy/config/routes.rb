@@ -3,4 +3,5 @@ Dummy::Application.routes.draw do
   match 'users'            => 'protected#users'
   match 'admins'           => 'protected#admins'
   match 'users_and_admins' => 'protected#users_and_admins'
+  match 'erb_template'     => 'protected#erb_template'
 end

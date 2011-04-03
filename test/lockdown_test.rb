@@ -8,4 +8,8 @@ class LockdownTest < ActiveSupport::TestCase
   test "it defines controller extensions" do
     assert_kind_of Module, Lockdown::ControllerExtensions
   end
+
+  test "it defines view extensions" do
+    assert_kind_of Module, Lockdown::ViewExtensions
+  end
 end

@@ -1,6 +1,4 @@
 class ProtectedController < ApplicationController
-  include Lockdown::ControllerExtensions
-
   ensure_role :admin,        :only => [ :admins           ]
   ensure_role :user,         :only => [ :users            ]
   ensure_role :admin, :user, :only => [ :users_and_admins ]
@@ -20,4 +18,6 @@ class ProtectedController < ApplicationController
   def users_and_admins
     render :text => "Welcome users and admins!"
   end
+
+  def erb_template ; end
 end

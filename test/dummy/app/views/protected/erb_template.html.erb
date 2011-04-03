@@ -1,0 +1,12 @@
+<p>Visible to all</p>
+<%= visible_to :admin do %>
+  <p>Visible to admins</p>
+<% end %>
+
+<%= visible_to :user do %>
+  <p>Visible to users</p>
+<% end %>
+
+<%= visible_to :admin, :user do %>
+  <p>Visible to admins and users</p>
+<% end %>
